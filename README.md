@@ -14,11 +14,13 @@
 # Ensuite,nous avons toutes nos routes que nous allons utiliser avec Postman.
 
 =>App.get/items va recuperer toute les lignes de la colonne items 
+
     avec sa requête SQL via la route http://localhost:3000/items 
     en passant par Postman en créeant notre route avec ce lien,et va nous renvoyer la reponse dans le body .
     elle va aussi gerer les erreurs en renvoyant un message si il y a un erreur,et aussi si tout est bon.
 
 =>app.post/caca va être une route pour crée une nouvelle colonne dans la table items grâce à la requête SQL.
+
     Dans postman,nous devons configurer comme avant cette route,et dans le body choisir raw et donner nos infos que nous voulons
     mettre dans cette colonne.Par exemple : {"name": "Mousse au chocolat","prix" : 600 ,"id_category": 2,"description":"mousse"},
     Puis,la requête va inserer dans la table items cette colonne.Avec un traitement du resultat dans la console.
