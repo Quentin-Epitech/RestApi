@@ -35,10 +35,11 @@ app.get('/items',(req,res)=> {
  })
 })
 
+
 app.post('/caca', (req, res) => {
-    const {name,prix,id_category,description}=req.body;
+    const {name,prix,id_category,description}=req.body; //recupere donnée envoyer
         const sql = "INSERT INTO items (name, prix, id_category, description) VALUES ( ?, ?, ?, ?)";
-    
+    //Db.Query : execute donnée envoyer  
         dataBase.query(sql,[name,prix,id_category,description], (err, results) => {
             if (err) {
                 return res.status(500).json({ error: 'Erreur du serveur' });
@@ -49,11 +50,11 @@ app.post('/caca', (req, res) => {
 });
 
 app.put('/update', (req, res) => { 
-    const { id, name, prix, id_category, description } = req.body;
+    const { id, name, prix, id_category, description } = req.body; //recupere donnée envoyer
     
     const sql = "UPDATE items SET name = ?, prix = ?, id_category = ?, description = ? WHERE id = ?";
     const values = [name, prix, id_category, description, id];
-
+    //Db.Query : execute donnée envoyer 
     dataBase.query(sql, values, (err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Erreur du serveur' });
@@ -64,11 +65,11 @@ app.put('/update', (req, res) => {
 });
 
 app.delete('/delete', (req, res) => {
-    const { id } = req.body;
+    const { id } = req.body; //recupere donnée envoyer
     
     const sql = "DELETE FROM items WHERE id = ?";
     const values = [id];
-
+    //Db.Query : execute donnée envoyer 
     dataBase.query(sql, values, (err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Erreur du serveur' });
@@ -78,10 +79,25 @@ app.delete('/delete', (req, res) => {
     });
 });
 
+app.delete('/delete',(req,res)=>{
+    const { id } = req.body; 
+    const sql = "DELETE FROM items WHERE id = ?";
+    const values = [id];
+    dataBase.query(sql,values,(err,results)=>{
+        if (err) {
+            return res.status(500).json({error : "blabla"});
+        }
+        else { 
+        return res.status(200).json({results});
+    }})
+})
+
+
 app.post('/item-category', async (req, res) => {
-    const { name, categoryId } = req.body;
+    const { name, categoryId } = req.body; //recupere donnée envoyer
     console.log('Données reçues :', req.body);
     const query = "SELECT id FROM items WHERE name = ?;";
+    //Db.Query : execute donnée envoyer 
     dataBase.query(query, [name], (err, results) => {
         if (err) {return res.status(500).json({ error: 'Erreur lors de la recherche' });}
         
@@ -95,4 +111,3 @@ app.post('/item-category', async (req, res) => {
         });
     });
 }); 
-
